@@ -1,26 +1,32 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Trading Robot</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        input[type="file"], input[type="text"], button { margin: 10px; padding: 8px; }
+        ul { list-style: none; padding: 0; }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>📈 Smart Trading Robot</h1>
-        <p>Upload your chart screenshot and get AI-powered Buy or Sell signals instantly.</p>
-    </header>
-    <main>
-        <section class="upload-section">
-            <input type="file" id="upload" accept="image/*" />
-            <button onclick="analyzeImage()">Analyze</button>
-        </section>
-        <div id="result"></div>
-    </main>
-    <footer>
-        <p>&copy; 2025 Smart Trading Robot. Built for traders, by traders.</p>
-    </footer>
-    <script src="script.js"></script>
+    <h1>📈 Smart Trading Robot</h1>
+    <p>Upload your chart screenshot and get AI-powered Buy or Sell signals instantly.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required><br>
+        <input type="text" name="comment" placeholder="Add comment (optional)"><br>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if signal %}
+        <h2>✅ Signal: {{ signal }}</h2>
+        <p><strong>Comment:</strong> {{ comment }}</p>
+        <ul>
+            <li><strong>Entry Point:</strong> {{ entry }}</li>
+            <li><strong>Stop Loss:</strong> {{ stop_loss }}</li>
+            <li><strong>Take Profit:</strong> {{ take_profit }}</li>
+        </ul>
+    {% endif %}
 </body>
 </html>
