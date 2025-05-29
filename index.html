@@ -1,32 +1,71 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Smart Trading Robot</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        input[type="file"], input[type="text"], button { margin: 10px; padding: 8px; }
-        ul { list-style: none; padding: 0; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input, textarea {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 12px;
+            background: #28a745;
+            border: none;
+            color: white;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .result {
+            margin-top: 20px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
-    <h1>📈 Smart Trading Robot</h1>
-    <p>Upload your chart screenshot and get AI-powered Buy or Sell signals instantly.</p>
-
+<div class="container">
+    <h1>Smart Trading Robot</h1>
     <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" required><br>
-        <input type="text" name="comment" placeholder="Add comment (optional)"><br>
+        <label>Upload Chart Screenshot:</label>
+        <input type="file" name="screenshot" accept="image/*" required>
+        <label>Add a comment (optional):</label>
+        <textarea name="comment" rows="3" placeholder="E.g., USD/JPY at resistance zone..."></textarea>
         <button type="submit">Analyze</button>
     </form>
-
-    {% if signal %}
-        <h2>✅ Signal: {{ signal }}</h2>
-        <p><strong>Comment:</strong> {{ comment }}</p>
-        <ul>
-            <li><strong>Entry Point:</strong> {{ entry }}</li>
-            <li><strong>Stop Loss:</strong> {{ stop_loss }}</li>
-            <li><strong>Take Profit:</strong> {{ take_profit }}</li>
-        </ul>
+    {% if prediction %}
+        <div class="result">
+            <h3>📈 Prediction: <strong>{{ prediction }}</strong></h3>
+            <p><strong>Comment:</strong> {{ comment }}</p>
+            <p>{{ entry_point }}</p>
+            <p>{{ stop_loss }}</p>
+            <p>{{ take_profit }}</p>
+        </div>
     {% endif %}
+</div>
 </body>
 </html>
